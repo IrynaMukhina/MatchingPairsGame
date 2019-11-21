@@ -1,0 +1,15 @@
+<div class="game__container">
+  <div class="game__board" #cardsContainer>
+      <app-game-card 
+        *ngFor="let card of memoryCards; let i = index"
+        (click)="selectCard(card.name, i)"
+        [isVisible]="(lastIndex$ | async) === i"
+        [cardUrl]="card.url">
+      </app-game-card>
+    </div>
+    <app-button
+      *ngIf="!(gameStatus$ | async)"
+      (click)="startGame()">
+      Start Game
+    </app-button>
+</div>

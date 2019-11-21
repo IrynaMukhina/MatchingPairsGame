@@ -1,0 +1,29 @@
+.game {
+  &__board {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  &__container {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.button {
+  &__start {
+    border: 2px solid gray;
+    width: 150px;
+    height: 35px;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background: orange;
+  }
+}

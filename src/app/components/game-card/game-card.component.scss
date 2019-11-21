@@ -1,0 +1,25 @@
+.game-card {
+  position: relative;
+  margin: 10px;
+  width: 150px;
+  height: 200px;
+
+}
+
+.hide {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 150px;
+    height: 200px;
+    background: darkblue;
+  }
+}
+
+.game-sticker {
+  width: 150px;
+  height: 200px;
+}
