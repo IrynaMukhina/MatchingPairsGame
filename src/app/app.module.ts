@@ -11,15 +11,13 @@ import { GameBoardComponent } from './components/game-board/game-board.component
 import { GameCardComponent } from './components/game-card/game-card.component';
 import { ButtonComponent } from './components/shared/button/button.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TimerComponent } from './components/timer/timer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameBoardComponent,
     GameCardComponent,
-    ButtonComponent,
-    TimerComponent
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
 <div class="game__container">
   <div class="game__board" #cardsContainer>
       <app-game-card 
-        *ngFor="let card of memoryCards; let i = index"
-        (click)="selectCard(card.name, i)"
-        [isVisible]="(lastIndex$ | async) === i"
+        *ngFor="let card of memoryCards$ | async; let i = index"
+        (click)="hasAPare(card.name, i)"
+        [isVisible]="lastIndexes.includes(i) || pareIndexes.includes(i)"
         [cardUrl]="card.url">
       </app-game-card>
     </div>

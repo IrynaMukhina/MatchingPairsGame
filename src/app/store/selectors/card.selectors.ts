@@ -9,7 +9,7 @@ export const getAllCards = createSelector(
 
 export const getLastSelectedCardIndex = createSelector(
   getCards,
-  (state: IState) => state.lastSelectedCard.index
+  (state: IState) => state.lastSelectedCard.indexes
  );
 
 export const getLastSelectedCardName = createSelector(
@@ -17,7 +17,13 @@ export const getLastSelectedCardName = createSelector(
   (state: IState) => state.lastSelectedCard.name
  );
 
-// export const getLastSelectedCardStatus = createSelector(
-//   getCards,
-//   (state: IState) => state.lastSelectedCard.isOpen
-//  );
+export const getPareIndexes = createSelector(
+  getCards,
+  (state: IState) => state.lastSelectedCard.pares
+ );
+
+export const getCard = createSelector(
+  getCards,
+  (state: IState) => state.lastSelectedCard
+ );
+
