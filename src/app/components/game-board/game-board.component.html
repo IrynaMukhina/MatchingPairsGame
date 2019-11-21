@@ -8,8 +8,14 @@
       </app-game-card>
     </div>
     <app-button
-      *ngIf="!(gameStatus$ | async)"
+      *ngIf="gameStatus"
       (click)="startGame()">
       Start Game
     </app-button>
+    <app-button
+      *ngIf="!gameStatus"
+      (click)="stopGame()">
+      Stop Game
+    </app-button>
+    <p>{{ subscribeTimer }}</p>
 </div>

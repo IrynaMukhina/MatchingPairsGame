@@ -16,8 +16,4 @@ export class GameCardComponent implements OnInit {
     console.log(this.isVisible);
   }
 
-  public flippCard(): void {
-    this.isVisible = !this.isVisible;
-  }
-
 }

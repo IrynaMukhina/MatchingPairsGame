@@ -1,13 +1,14 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+
 import { IAppState } from '../../store/app.store';
 import { Store } from '@ngrx/store';
 import { getGameStatus } from '../../store/selectors/game.selectors';
 import { StartGame } from '../../store/actions/game.actions';
 import { getAllCards, getLastSelectedCardIndex, getLastSelectedCardName } from '../../store/selectors/card.selectors';
-import { ICard } from '../../interfaces';
 import { Observable } from 'rxjs';
 import { SetLastSelectedCard } from '../../store/actions/card.actions';
-import { IfStmt } from '@angular/compiler';
+
+import { ICard } from '../../interfaces';
 
 @Component({
   selector: 'app-game-board',
@@ -17,12 +18,13 @@ import { IfStmt } from '@angular/compiler';
 export class GameBoardComponent implements OnInit {
   @ViewChild('cardsContainer', {static: false}) cardsContainer: ElementRef;
 
-  // public memoryCards$ = new Array(12).fill(1);
   public memoryCards;
   public lastIndex$: Observable<any>;
   public lastName$: Observable<any>;
-  gameStatus$: Observable<any>;
+  public gameStatus = true;
   public lastSelectedCard: ICard;
+  public interval;
+  public subscribeTimer = 0;
 
   constructor(private store: Store<IAppState>) { }
 
@@ -30,15 +32,24 @@ export class GameBoardComponent implements OnInit {
 
     this.lastIndex$ = this.store.select(getLastSelectedCardIndex);
     this.lastName$ = this.store.select(getLastSelectedCardName);
-    this.gameStatus$ = this.store.select(getGameStatus);
   }
 
-  public startGame() {
-    this.store.dispatch(new StartGame());
+  public startGame(): void {
+    this.gameStatus = false;
 
     this.store.select(getAllCards)
     .subscribe(data =>
       this.memoryCards = data.sort(() => Math.random() - 0.5));
+
+    this.startTimer();
+  }
+
+  public stopGame(): void {
+    this.gameStatus = true;
+    this.memoryCards = [];
+    this.subscribeTimer = 0;
+
+    this.stopTimer();
   }
 
   public selectCard(cardName, cardIndex) {
@@ -55,8 +66,6 @@ export class GameBoardComponent implements OnInit {
     } else {
       this.store.dispatch(new SetLastSelectedCard({name: cardName, index: cardIndex}));
     }
-    // console.log(cardIndex);
-    // console.log(this.lastName$.subscribe(data => console.log(data)));
   }
 
   public hasAPare(name) {
@@ -68,5 +77,15 @@ export class GameBoardComponent implements OnInit {
 
       }
     }
+  }
+
+  public startTimer(): void {
+    this.interval = setInterval(() => {
+      this.subscribeTimer += 1;
+    }, 1000);
+  }
+
+  public stopTimer() {
+    clearInterval(this.interval);
   }
 }
